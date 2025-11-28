@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build, Test and Deploy Python Flask API to Azure Web App
+name: Build, Test and Deploy Python App to Azure Web App - task-forge
 
 on:
   push:
@@ -93,11 +93,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build, test]
     permissions:
-      id-token: write
       contents: read
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
       - name: Download artifact from build job
@@ -110,9 +106,10 @@ jobs:
           unzip release.zip
           rm release.zip
 
-      - name: Login to Azure
+      - name: Login to Azure using Service Principal
         uses: azure/login@v2
         with:
+          auth-type: service-principal
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_8B5154DB47204797813A0BF3D3CD7549 }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_FEEBA7ED63A54A02BDBA41DEA65AE6E9 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_D9E52638C64344638E91E510FA0B5116 }}
