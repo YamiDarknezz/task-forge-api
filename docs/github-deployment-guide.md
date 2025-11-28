@@ -225,7 +225,7 @@ Los workflows están **completamente separados**:
 - No toca Azure
 - Trabaja con `SONAR_TOKEN`
 
-**Azure Deployment (`azure-deploy.yml`):**
+**Azure Deployment (`main_task-forge-api-upn.yml`):**
 - Se ejecuta en: push a `main`/`master`
 - Build, test, y deploy
 - Usa secrets de Azure
@@ -347,7 +347,7 @@ Revisa logs. Causas comunes:
 
 ### "Azure deployment failed after code-quality changes"
 **No debería pasar.** Los workflows son independientes. Si pasa:
-1. Revisa cambios en `.github/workflows/azure-deploy.yml` (no debería haber)
+1. Revisa cambios en `.github/workflows/main_task-forge-api-upn.yml` (no debería haber)
 2. Verifica secrets de Azure no se modified
 3. Rollback si es necesario
 

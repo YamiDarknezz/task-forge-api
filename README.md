@@ -118,7 +118,8 @@ task-forge-api/
 │   └── init_db_azure.sql        # Schema para Azure SQL
 ├── migrations/                  # Migraciones (Alembic)
 ├── .github/workflows/           # Pipelines CI/CD
-│   └── azure-deploy.yml
+│   ├── code-quality.yml         # Análisis de calidad y accesibilidad
+│   └── main_task-forge-api-upn.yml  # Deployment a Azure
 ├── Dockerfile
 ├── docker-compose.yml
 ├── requirements.txt
@@ -412,7 +413,7 @@ El proyecto incluye dos workflows de GitHub Actions separados:
 - Se ejecuta en cada `push` y `pull_request`
 - No bloquea el deployment
 
-### 2. Azure Deployment ([`azure-deploy.yml`](.github/workflows/azure-deploy.yml))
+### 2. Azure Deployment ([`main_task-forge-api-upn.yml`](.github/workflows/main_task-forge-api-upn.yml))
 - **Build** - Instalación de dependencias y creación de artefacto
 - **Test** - Ejecución de pytest con requisito de cobertura (>70%)
 - **Deploy** - Despliegue a Azure App Service
