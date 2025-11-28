@@ -3,8 +3,8 @@ name: Build, Test and Deploy Flask API to Azure Web App
 on:
   push:
     branches:
-      - master
       - main
+      - master
   workflow_dispatch:
 
 jobs:
@@ -21,25 +21,24 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Create and activate virtual environment
+      - name: Create virtual environment
         run: |
           python -m venv venv
           source venv/bin/activate
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Zip artifact for deployment
-        run: |
-          zip -r release.zip . -x "*.git*" "venv/*" "__pycache__/*" "*.pyc" ".env" "tests/*" "htmlcov/*" ".pytest_cache/*"
-
-      - name: Upload artifact for deployment jobs
+      - name: Upload artifact for deployment
         uses: actions/upload-artifact@v4
         with:
           name: python-app
-          path: release.zip
+          path: |
+            .
+            !venv/
+            !tests/
+            !__pycache__/
+            !htmlcov/
+            !.pytest_cache/
+            !*.git*
 
   test:
     runs-on: ubuntu-latest
@@ -80,12 +79,6 @@ jobs:
           name: coverage-report
           path: htmlcov/
 
-      - name: Comment coverage on PR
-        if: github.event_name == 'pull_request'
-        uses: py-cov-action/python-coverage-comment-action@v3
-        with:
-          GITHUB_TOKEN: ${{ github.token }}
-
   deploy:
     runs-on: ubuntu-latest
     needs: [build, test]
@@ -102,17 +95,12 @@ jobs:
         with:
           name: python-app
 
-      - name: Unzip artifact for deployment
-        run: |
-          unzip release.zip
-          rm release.zip
-
-      - name: Login to Azure using OIDC
+      - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_8B5154DB47204797813A0BF3D3CD7549 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_FEEBA7ED63A54A02BDBA41DEA65AE6E9 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_D9E52638C64344638E91E510FA0B5116 }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
