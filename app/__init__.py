@@ -88,7 +88,7 @@ def create_app(config_name=None):
             }
         ],
         "basePath": "/api",
-        "schemes": ["http", "https"]
+        "schemes": ["https"] if app.config['FLASK_ENV'] == 'production' else ["http", "https"]
     }
 
     Swagger(app, config=swagger_config, template=swagger_template)

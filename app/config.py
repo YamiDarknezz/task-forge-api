@@ -88,10 +88,15 @@ class ProductionConfig(Config):
     """Production configuration"""
     FLASK_ENV = 'production'
 
-    # Allow SQLite in production for now, but should use Azure SQL Database
-    # The SQLALCHEMY_DATABASE_URI is inherited from Config class
-    # To use Azure SQL, configure these environment variables:
+    # Force production-safe settings
+    DEBUG = False
+    TESTING = False
+    RATELIMIT_ENABLED = True
+
+    # Database URI is inherited from Config class
+    # Will use Azure SQL if environment variables are configured:
     # AZURE_SQL_SERVER, AZURE_SQL_DATABASE, AZURE_SQL_USER, AZURE_SQL_PASSWORD
+    # Otherwise falls back to SQLite (not recommended for production)
 
 
 # Configuration dictionary
