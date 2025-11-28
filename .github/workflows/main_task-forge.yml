@@ -93,7 +93,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build, test]
     permissions:
-      contents: read
+      id-token: write #This is required for requesting the JWT
+      contents: read #This is required for actions/checkout
 
     steps:
       - name: Download artifact from build job
@@ -106,10 +107,9 @@ jobs:
           unzip release.zip
           rm release.zip
 
-      - name: Login to Azure using Service Principal
+      - name: Login to Azure
         uses: azure/login@v2
         with:
-          auth-type: SERVICE_PRINCIPAL
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_8B5154DB47204797813A0BF3D3CD7549 }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_FEEBA7ED63A54A02BDBA41DEA65AE6E9 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_D9E52638C64344638E91E510FA0B5116 }}
