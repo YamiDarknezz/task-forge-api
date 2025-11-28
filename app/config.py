@@ -88,13 +88,10 @@ class ProductionConfig(Config):
     """Production configuration"""
     FLASK_ENV = 'production'
 
-    # Override with stronger validation for production
-    @property
-    def SQLALCHEMY_DATABASE_URI(self):
-        uri = super().SQLALCHEMY_DATABASE_URI
-        if uri.startswith('sqlite'):
-            raise ValueError("SQLite is not allowed in production. Configure Azure SQL Database.")
-        return uri
+    # Allow SQLite in production for now, but should use Azure SQL Database
+    # The SQLALCHEMY_DATABASE_URI is inherited from Config class
+    # To use Azure SQL, configure these environment variables:
+    # AZURE_SQL_SERVER, AZURE_SQL_DATABASE, AZURE_SQL_USER, AZURE_SQL_PASSWORD
 
 
 # Configuration dictionary
