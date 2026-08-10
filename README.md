@@ -1,8 +1,10 @@
 # TaskForge API
 
-> Una API RESTful profesional para gestión de tareas construida con Flask, SQLAlchemy y Azure SQL Database.
+[English](README.md) | [Español](README.es.md)
 
-## 📊 Badges
+> A professional RESTful task management API built with Flask, SQLAlchemy, and Azure SQL Database.
+
+## Status
 
 [![Build and Deploy](https://github.com/YamiDarknezz/task-forge-api/actions/workflows/main_task-forge.yml/badge.svg)](https://github.com/YamiDarknezz/task-forge-api/actions/workflows/main_task-forge.yml)
 [![Code Quality](https://github.com/YamiDarknezz/task-forge-api/actions/workflows/code-quality.yml/badge.svg)](https://github.com/YamiDarknezz/task-forge-api/actions/workflows/code-quality.yml)
@@ -13,611 +15,201 @@
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=YamiDarknezz_task-forge-api&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=YamiDarknezz_task-forge-api)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=YamiDarknezz_task-forge-api&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=YamiDarknezz_task-forge-api)
 
-## 🌐 Demo en Vivo
+## About
 
-**API en Producción:** [https://task-forge-gbd6h8gtg8hchve9.chilecentral-01.azurewebsites.net/api/docs](https://task-forge-gbd6h8gtg8hchve9.chilecentral-01.azurewebsites.net/api/docs)
+TaskForge API is a production-grade task management REST API that demonstrates backend engineering best practices with Flask: JWT authentication, role-based access control (RBAC), comprehensive testing, SonarCloud quality gates, accessibility testing, and a CI/CD pipeline targeting Azure.
 
-Accede a la documentación interactiva Swagger UI y prueba los endpoints en tiempo real.
+Highlights:
 
-## 📋 Descripción
+- RESTful API architecture with Flask and the application factory pattern
+- 268 pytest tests with >73% code coverage
+- SonarCloud quality analysis (bugs, vulnerabilities, code smells, coverage)
+- AXE-core accessibility testing (WCAG 2.1 AA)
+- JWT authentication and role-based authorization
+- SQLAlchemy ORM with Azure SQL Database and SQLite fallback
+- CI/CD with GitHub Actions
+- Swagger/OpenAPI interactive documentation
 
-TaskForge API es un sistema completo de gestión de tareas que demuestra la implementación de **mejores prácticas en desarrollo backend con Flask**, incluyendo autenticación JWT, control de acceso basado en roles (RBAC), testing exhaustivo, análisis de calidad de código, pruebas de accesibilidad, y despliegue en Azure.
+> **Deployment note:** CI/CD is configured for Azure (deployment paused — Azure subscription expired).
 
-**Este proyecto fue desarrollado para demostrar conocimientos avanzados en:**
-- ✅ Arquitectura de APIs RESTful con Flask
-- ✅ Testing exhaustivo con pytest (268 tests, >73% cobertura)
-- ✅ Análisis de calidad de código con SonarCloud
-- ✅ Pruebas de accesibilidad con AXE (WCAG 2.1)
-- ✅ Autenticación y autorización con JWT
-- ✅ ORM con SQLAlchemy
-- ✅ Integración con Azure SQL Database
-- ✅ CI/CD con GitHub Actions
-- ✅ Deployment en Azure App Service
-- ✅ Documentación con Swagger/OpenAPI
+## Features
 
-## ✨ Características Principales
+- **JWT Authentication** — Full auth flow with access and refresh tokens
+- **RBAC** — Admin and User roles with granular permissions
+- **Task CRUD** — Title, description, priority, status, and dates
+- **Tag system** — Organize tasks with customizable tags and colors
+- **Advanced filtering** — By status, priority, user, tags, and dates
+- **Pagination & sorting** — Server-side pagination with configurable ordering
+- **Data export** — Tasks to CSV or JSON
+- **Rate limiting** — Flask-Limiter abuse protection
+- **CORS** — Cross-origin request support
+- **Interactive docs** — Swagger/OpenAPI UI
+- **Docker** — Containerized with Docker Compose
 
-- 🔐 **Autenticación JWT** - Sistema completo con access y refresh tokens
-- 👥 **RBAC (Control de Acceso Basado en Roles)** - Roles de Admin y Usuario con permisos específicos
-- ✅ **CRUD Completo** - Gestión de tareas con título, descripción, prioridad, estado y fechas
-- 🏷️ **Sistema de Etiquetas** - Organiza tareas con etiquetas personalizables y colores
-- 🔍 **Filtrado Avanzado** - Filtra tareas por estado, prioridad, usuario, etiquetas y fechas
-- 📄 **Paginación y Ordenamiento** - Paginación del lado del servidor con ordenamiento personalizable
-- 📊 **Exportación de Datos** - Exporta tareas a formatos CSV o JSON
-- 🚦 **Rate Limiting** - Protección contra abuso con Flask-Limiter
-- 🌐 **Soporte CORS** - Configurado para peticiones cross-origin
-- 📚 **Documentación Interactiva** - Swagger/OpenAPI UI
-- 🧪 **Testing Completo** - 268 tests con pytest y >73% de cobertura de código
-- 🚀 **CI/CD Pipeline** - Despliegue automatizado a Azure App Service
-- 🐳 **Docker Support** - Aplicación containerizada con Docker Compose
-- ☁️ **Producción en Azure** - Desplegado en Azure App Service con Azure SQL Database
+## Tech Stack
 
-## 🛠️ Stack Tecnológico
+| Layer | Technology |
+|---|---|
+| Web framework | Flask 3.1, Gunicorn (WSGI) |
+| ORM | SQLAlchemy 2.0 |
+| Auth | Flask-JWT-Extended (JWT), bcrypt password hashing |
+| Database | Azure SQL Database (prod), SQLite (dev/test) |
+| Docs | Flasgger (Swagger/OpenAPI) |
+| API security | Flask-CORS, Flask-Limiter |
+| Testing | pytest, pytest-cov, pytest-flask, pytest-mock |
+| Quality | SonarCloud, AXE-core + Playwright (accessibility) |
+| Delivery | GitHub Actions, Docker, Azure App Service |
 
-### Backend
-- **Flask** 3.1.2 - Framework web
-- **SQLAlchemy** 2.0.44 - ORM
-- **Flask-JWT-Extended** 4.7.1 - Autenticación JWT
-- **pyodbc** 5.3.0 - Conector para Azure SQL Server
-- **Flask-CORS** 6.0.1 - Manejo de CORS
-- **Flask-Limiter** 4.0.0 - Rate limiting
-- **Flasgger** 0.9.7.1 - Documentación Swagger
-
-### Base de Datos
-- **Azure SQL Database** - Base de datos en producción
-- **SQLite** - Fallback para desarrollo/testing
-
-### Testing y Calidad
-- **pytest** 9.0.1 - Framework de testing
-- **pytest-cov** 7.0.0 - Cobertura de código
-- **pytest-flask** 1.3.0 - Testing para Flask
-- **pytest-mock** 3.15.1 - Mocking
-- **Cobertura** >73% - Umbral de cobertura de código
-- **SonarCloud** - Análisis de calidad de código (bugs, vulnerabilities, code smells)
-- **AXE-core** (Playwright) - Pruebas de accesibilidad WCAG 2.1
-
-### Despliegue
-- **Gunicorn** 21.2.0 - Servidor WSGI
-- **Docker** - Containerización
-- **GitHub Actions** - Pipeline CI/CD
-- **Azure App Service** - Hosting en la nube (Linux)
-- **Azure SQL Database** - Base de datos gestionada
-
-## 📁 Estructura del Proyecto
+## Architecture
 
 ```
-task-forge-api/
-├── app/
-│   ├── __init__.py              # Application factory
-│   ├── config.py                # Configuración por entornos
-│   ├── models/                  # Modelos de base de datos
-│   │   ├── user.py              # User, Role, RefreshToken
-│   │   ├── task.py              # Task, TaskStatus, TaskPriority
-│   │   └── tag.py               # Tag
-│   ├── services/                # Capa de lógica de negocio
-│   │   ├── auth_service.py      # Autenticación y autorización
-│   │   ├── task_service.py      # Gestión de tareas
-│   │   ├── user_service.py      # Gestión de usuarios
-│   │   └── tag_service.py       # Gestión de etiquetas
-│   ├── routes/                  # Endpoints de la API
-│   │   ├── health.py            # Health check
-│   │   ├── auth.py              # Autenticación
-│   │   ├── tasks.py             # CRUD de tareas
-│   │   ├── users.py             # Gestión de usuarios
-│   │   └── tags.py              # Gestión de etiquetas
-│   ├── middleware/              # Decoradores de Auth y RBAC
-│   │   ├── auth.py              # Middleware de autenticación
-│   │   └── rbac.py              # Middleware de autorización
-│   └── utils/                   # Funciones auxiliares
-│       ├── helpers.py           # Paginación, respuestas
-│       ├── validators.py        # Validación de inputs
-│       └── export.py            # Exportación CSV/JSON
-├── tests/                       # Suite de tests (268 tests)
-│   ├── conftest.py              # Fixtures de pytest
-│   ├── test_auth.py             # Tests de autenticación
-│   ├── test_tasks.py            # Tests de tareas
-│   ├── test_users.py            # Tests de usuarios
-│   ├── test_tags.py             # Tests de etiquetas
-│   ├── test_services.py         # Tests de servicios
-│   ├── test_models.py           # Tests de modelos
-│   ├── test_middleware.py       # Tests de middleware
-│   ├── test_helpers.py          # Tests de helpers
-│   └── test_validators.py       # Tests de validadores
-├── scripts/                     # Scripts de utilidad
-│   ├── init_db_azure.sql        # Schema para Azure SQL
-│   └── reset_admin_password.py # Resetear contraseña admin
-├── docs/                        # Documentación
-│   ├── azure-app-service-configuration.md
-│   ├── sonarcloud-setup.md
-│   └── axe-accessibility.md
-├── .github/workflows/           # Pipelines CI/CD
-│   ├── code-quality.yml         # Análisis de calidad y accesibilidad
-│   └── main_task-forge.yml      # Deployment a Azure
-├── Dockerfile
-├── docker-compose.yml
-├── startup.sh                   # Script de inicio para Azure
-├── requirements.txt
-├── pytest.ini
-├── run.py                       # Punto de entrada
-└── README.md
+app/
+├── __init__.py          # Application factory, extensions, error/JWT handlers
+├── config.py            # Environment-based configuration
+├── models/              # SQLAlchemy models (user, task, tag)
+├── services/            # Business logic layer (auth, task, user, tag)
+├── routes/              # API blueprints (health, auth, tasks, users, tags)
+├── middleware/          # Auth and RBAC decorators
+└── utils/               # Pagination, validation, CSV/JSON export
+tests/                   # 268 tests across 9 suites
+scripts/                 # DB init script, admin password reset
+docs/                    # Azure, SonarCloud, and accessibility guides
+.github/workflows/       # CI/CD pipelines
 ```
 
-## 🚀 Inicio Rápido
+The API follows a layered design: routes (HTTP) → services (business logic) → models (ORM), with middleware enforcing authentication and authorization.
 
-### Requisitos Previos
+## Endpoints
 
-- Python 3.11+
-- Azure SQL Database (o SQLite para desarrollo local)
-- Docker (opcional)
+Base path: `/api`
 
-### Instalación Local
+| Method | Endpoint | Description | Access |
+|---|---|---|---|
+| GET | `/health` | Health check | Public |
+| POST | `/auth/register` | Register a user | Public |
+| POST | `/auth/login` | Login, returns access + refresh tokens | Public |
+| POST | `/auth/refresh` | Refresh access token | Auth |
+| POST | `/auth/logout` | Revoke refresh token | Auth |
+| GET | `/auth/me` | Current user profile | Auth |
+| POST | `/auth/change-password` | Change password | Auth |
+| GET | `/users` | List users (paginated) | Admin |
+| GET/PUT/PATCH/DELETE | `/users/<id>` | Manage a user | Admin |
+| POST | `/users/<id>/deactivate` · `/activate` | Suspend/reactivate user | Admin |
+| GET/POST | `/tasks` | List (filter/paginate/sort) and create tasks | Auth |
+| GET/PUT/PATCH/DELETE | `/tasks/<id>` | Retrieve, update, delete a task | Auth |
+| POST | `/tasks/<id>/complete` | Mark a task complete | Auth |
+| GET | `/tasks/statistics` | Task stats | Auth |
+| GET | `/tasks/export` | Export tasks as CSV/JSON | Auth |
+| GET/POST | `/tags` | List and create tags | Auth |
+| GET/PUT/PATCH/DELETE | `/tags/<id>` | Manage a tag | Auth |
 
-1. **Clonar el repositorio**
+Interactive docs: `http://localhost:5000/api/docs` (Swagger UI)
+
+## Run Locally
+
+**Prerequisites:** Python 3.11+, Azure SQL Database (or SQLite for local dev), optional Docker.
+
 ```bash
 git clone https://github.com/YamiDarknezz/task-forge-api.git
 cd task-forge-api
-```
 
-2. **Crear entorno virtual**
-```bash
 python -m venv venv
+venv\Scripts\activate        # Windows
+source venv/bin/activate    # Linux/Mac
 
-# En Windows:
-venv\Scripts\activate
-
-# En Linux/Mac:
-source venv/bin/activate
-```
-
-3. **Instalar dependencias**
-```bash
 pip install -r requirements.txt
+
+copy .env.example .env      # Windows
+cp .env.example .env        # Linux/Mac
+# then edit .env with your configuration
 ```
 
-4. **Configurar variables de entorno**
-```bash
-# Copiar el archivo de ejemplo
-copy .env.example .env  # Windows
-# o
-cp .env.example .env    # Linux/Mac
-
-# Editar .env con tu configuración
-```
-
-5. **Inicializar base de datos**
-
-Para Azure SQL:
-```bash
-# Ejecutar scripts/init_db_azure.sql en Azure Data Studio o SQL Server Management Studio
-```
-
-Para SQLite (desarrollo):
-```bash
-flask init-db
-```
-
-6. **Ejecutar la aplicación**
-```bash
-python run.py
-```
-
-La API estará disponible en `http://localhost:5000`
-
-### Despliegue con Docker
+Initialize the database:
 
 ```bash
-# Construir y ejecutar con Docker Compose
-docker-compose up --build
-
-# Acceder a la API en http://localhost:5000
+flask init-db               # SQLite (local dev)
+# or run scripts/init_db_azure.sql against Azure SQL
 ```
 
-## ⚙️ Variables de Entorno
+Run the app:
 
-Crear un archivo `.env` basado en `.env.example`:
+```bash
+python run.py               # API at http://localhost:5000
+```
+
+Or with Docker:
+
+```bash
+docker-compose up --build   # API at http://localhost:5000
+```
+
+## Environment Variables
+
+Configure a `.env` file based on `.env.example`:
 
 ```env
-# Aplicación
 FLASK_APP=run.py
 FLASK_ENV=production
-SECRET_KEY=tu-clave-secreta-aqui-cambiar-en-produccion
-JWT_SECRET_KEY=tu-clave-jwt-secreta-aqui-cambiar-en-produccion
+SECRET_KEY=your-secret-key
+JWT_SECRET_KEY=your-jwt-secret-key
 
-# Azure SQL Database
-AZURE_SQL_SERVER=tuservidor.database.windows.net
+AZURE_SQL_SERVER=your-server.database.windows.net
 AZURE_SQL_DATABASE=taskforge_db
-AZURE_SQL_USER=tuusuario
-AZURE_SQL_PASSWORD=TuPassword123
+AZURE_SQL_USER=your-user
+AZURE_SQL_PASSWORD=YourPassword123
 AZURE_SQL_PORT=1433
 
-# Configuración JWT
-JWT_ACCESS_TOKEN_EXPIRES=3600        # 1 hora
-JWT_REFRESH_TOKEN_EXPIRES=2592000    # 30 días
+JWT_ACCESS_TOKEN_EXPIRES=3600        # 1 hour
+JWT_REFRESH_TOKEN_EXPIRES=2592000    # 30 days
 
-# Rate Limiting
 RATELIMIT_ENABLED=true
 RATELIMIT_STORAGE_URL=memory://
 RATELIMIT_DEFAULT=200 per day;50 per hour
 
-# CORS
 CORS_ORIGINS=http://localhost:3000,http://localhost:5173
-
-# Paginación
 DEFAULT_PAGE_SIZE=10
 MAX_PAGE_SIZE=100
-
-# Logging
 LOG_LEVEL=INFO
 LOG_FORMAT=json
-
-# Aplicación
-APP_NAME=TaskForge API
-APP_VERSION=1.0.0
 ```
 
-## 📚 Documentación de la API
-
-### Documentación Interactiva
-
-**Producción:** [https://task-forge-gbd6h8gtg8hchve9.chilecentral-01.azurewebsites.net/api/docs](https://task-forge-gbd6h8gtg8hchve9.chilecentral-01.azurewebsites.net/api/docs)
-
-**Local:** `http://localhost:5000/api/docs`
-
-### Ejemplos de Uso
-
-#### Autenticación
-
-**Registro:**
-```http
-POST /api/auth/register
-Content-Type: application/json
-
-{
-  "username": "usuario123",
-  "email": "usuario@ejemplo.com",
-  "password": "Password123!",
-  "first_name": "Juan",
-  "last_name": "Pérez"
-}
-```
-
-**Login:**
-```http
-POST /api/auth/login
-Content-Type: application/json
-
-{
-  "email": "usuario@ejemplo.com",
-  "password": "Password123!"
-}
-```
-
-**Respuesta:**
-```json
-{
-  "success": true,
-  "data": {
-    "access_token": "eyJhbGci...",
-    "refresh_token": "eyJhbGci...",
-    "user": {
-      "id": 1,
-      "username": "usuario123",
-      "email": "usuario@ejemplo.com",
-      "role": "user"
-    }
-  }
-}
-```
-
-**Refrescar Token:**
-```http
-POST /api/auth/refresh
-Authorization: Bearer <refresh_token>
-```
-
-#### Tareas
-
-**Crear Tarea:**
-```http
-POST /api/tasks
-Authorization: Bearer <access_token>
-Content-Type: application/json
-
-{
-  "title": "Completar proyecto",
-  "description": "Finalizar la API TaskForge",
-  "priority": "high",
-  "status": "in_progress",
-  "due_date": "2024-12-31T23:59:59",
-  "tags": [1, 2]
-}
-```
-
-**Obtener Tareas (con filtros):**
-```http
-GET /api/tasks?status=pending&priority=high&page=1&per_page=10&sort_by=due_date&sort_order=asc
-Authorization: Bearer <access_token>
-```
-
-**Exportar Tareas:**
-```http
-GET /api/tasks/export?format=csv
-Authorization: Bearer <access_token>
-```
-
-**Estadísticas:**
-```http
-GET /api/tasks/statistics
-Authorization: Bearer <access_token>
-```
-
-## 🧪 Testing
-
-Ejecutar la suite de tests:
+## Running Tests
 
 ```bash
-# Ejecutar todos los tests
-pytest
-
-# Ejecutar con reporte de cobertura
-pytest --cov=app --cov-report=html --cov-report=term
-
-# Ejecutar tests específicos
-pytest tests/test_auth.py
-
-# Ejecutar con verbosidad
-pytest -v
-
-# Ver reporte de cobertura en navegador
-# El reporte se genera en htmlcov/index.html
+pytest                                  # full suite (268 tests)
+pytest --cov=app --cov-report=term      # with coverage report
+pytest tests/test_auth.py               # single suite
+pytest -v                               # verbose output
 ```
 
-### Resultados de Testing
+Results: **268 tests passing**, **>73% coverage** (1,053+ / 1,441 lines), with suites for auth, tasks, users, tags, services, models, middleware, helpers, and validators.
 
-- **Total de Tests**: 268 ✅
-- **Tests Pasando**: 268 ✅
-- **Cobertura de Código**: >73%
-- **Líneas Cubiertas**: 1,053+ / 1,441
+Accessibility checks (local):
 
-### Categorías de Tests
-
-- ✅ Tests de Autenticación (17 tests)
-- ✅ Tests de Tareas (22 tests)
-- ✅ Tests de Usuarios (18 tests)
-- ✅ Tests de Etiquetas (18 tests)
-- ✅ Tests de Servicios (72 tests)
-- ✅ Tests de Modelos (23 tests)
-- ✅ Tests de Middleware (11 tests)
-- ✅ Tests de Helpers (29 tests)
-- ✅ Tests de Validadores (58 tests)
-
-## 📊 Calidad de Código y Accesibilidad
-
-### SonarCloud - Análisis de Calidad
-
-El proyecto utiliza **SonarCloud** para análisis automático de calidad de código en cada push/PR.
-
-**Qué analiza:**
-- 🐛 **Bugs** - Errores en el código
-- 🔒 **Vulnerabilities** - Problemas de seguridad
-- 💡 **Code Smells** - Código difícil de mantener
-- 📊 **Coverage** - Cobertura de tests (>73%)
-- 🔁 **Duplications** - Código duplicado
-
-**Dashboard:** [Ver métricas en SonarCloud →](https://sonarcloud.io/summary/new_code?id=YamiDarknezz_task-forge-api)
-
-**Ejecución:**
-- Automática en GitHub Actions (cada push/PR)
-- Ver workflow [`code-quality.yml`](.github/workflows/code-quality.yml)
-
-Consulta la [guía de SonarCloud](docs/sonarcloud-setup.md) para más información.
-
----
-
-### AXE - Pruebas de Accesibilidad
-
-Pruebas automatizadas de accesibilidad para el Swagger UI usando **AXE-core** y **Playwright**.
-
-**Qué verifica:**
-- ♿ **WCAG 2.1 AA** - Estándares de accesibilidad
-- 🎨 **Contraste de colores** - Legibilidad
-- 🏷️ **Labels y ARIA** - Lectores de pantalla
-- ⌨️ **Navegación por teclado** - Usabilidad
-
-**Ejecución local:**
 ```powershell
 .\tests\accessibility\run-axe-local.ps1
 ```
 
-**Ejecución automática:**
-- Se ejecuta en GitHub Actions
-- Genera reporte HTML descargable
-- Ver workflow [`code-quality.yml`](.github/workflows/code-quality.yml)
+## CI/CD
 
-Consulta la [guía de AXE](docs/axe-accessibility.md) para más información.
+Two GitHub Actions workflows:
 
----
+1. **Code Quality** (`code-quality.yml`) — runs on every push/PR: SonarCloud analysis and AXE accessibility tests.
+2. **Azure Deployment** (`main_task-forge.yml`) — runs on push to `main`: build → test (requires >70% coverage) → deploy to Azure App Service (Linux, Python 3.11, Gunicorn) via OIDC.
 
-## 🔄 Pipeline CI/CD
+> Deployment is currently paused because the Azure subscription expired; the pipeline remains fully configured.
 
-El proyecto incluye dos workflows de GitHub Actions separados:
+Secrets required: `AZUREAPPSERVICE_CLIENTID_*`, `AZUREAPPSERVICE_TENANTID_*`, `AZUREAPPSERVICE_SUBSCRIPTIONID_*` (Azure), `SONAR_TOKEN` (SonarCloud).
 
-### 1. Code Quality Analysis ([`code-quality.yml`](.github/workflows/code-quality.yml))
-- **SonarCloud** - Análisis de calidad de código
-- **AXE** - Pruebas de accesibilidad
-- Se ejecuta en cada `push` y `pull_request`
-- No bloquea el deployment
+## Quality & Security
 
-### 2. Azure Deployment ([`main_task-forge.yml`](.github/workflows/main_task-forge.yml))
-- **Build** - Instalación de dependencias y creación de artefacto
-- **Test** - Ejecución de pytest con requisito de cobertura (>70%)
-- **Deploy** - Despliegue a Azure App Service con autenticación OIDC
-- Se ejecuta en push a `main`/`master`
+- **SonarCloud** — automatic analysis of bugs, vulnerabilities, code smells, coverage, and duplications on every push/PR ([dashboard](https://sonarcloud.io/summary/new_code?id=YamiDarknezz_task-forge-api))
+- **Security** — bcrypt-hashed passwords, expiring JWT tokens, RBAC, rate limiting, CORS configuration, SQL injection protection via ORM, revocable refresh tokens, forced HTTPS and debug disabled in production
 
-**Flujo de Deployment:**
-```
-Push → Build → Test → Deploy → Azure App Service
-         ↓        ↓
-    requirements pytest
-         ↓     >70% coverage
-    artifact.zip
-```
+## License
 
-### Secrets Requeridos en GitHub
+MIT
 
-**Para Azure Deployment:**
-- `AZUREAPPSERVICE_CLIENTID_*` - Client ID de Azure
-- `AZUREAPPSERVICE_TENANTID_*` - Tenant ID de Azure
-- `AZUREAPPSERVICE_SUBSCRIPTIONID_*` - Subscription ID de Azure
+## Author
 
-**Para Code Quality:**
-- `SONAR_TOKEN` - Token de SonarCloud (ver [guía de setup](docs/sonarcloud-setup.md))
-
-## ☁️ Deployment en Azure
-
-### Configuración en Azure App Service
-
-El proyecto está configurado para desplegarse en **Azure App Service (Linux)** con las siguientes características:
-
-**Stack:**
-- Runtime: Python 3.11
-- Startup Command: `bash startup.sh`
-- Web Server: Gunicorn (4 workers)
-
-**Variables de Entorno Configuradas:**
-- `FLASK_ENV=production`
-- `SECRET_KEY` - Clave secreta de la aplicación
-- `JWT_SECRET_KEY` - Clave para tokens JWT
-- `AZURE_SQL_*` - Credenciales de Azure SQL Database
-
-**URL de Producción:**
-[https://task-forge-gbd6h8gtg8hchve9.chilecentral-01.azurewebsites.net](https://task-forge-gbd6h8gtg8hchve9.chilecentral-01.azurewebsites.net)
-
-**Documentación API:**
-[https://task-forge-gbd6h8gtg8hchve9.chilecentral-01.azurewebsites.net/api/docs](https://task-forge-gbd6h8gtg8hchve9.chilecentral-01.azurewebsites.net/api/docs)
-
-### Guía de Configuración
-
-Para configurar tu propio deployment en Azure, consulta:
-- [Azure App Service Configuration Guide](docs/azure-app-service-configuration.md)
-- [Azure Quick Fix Guide](AZURE_QUICK_FIX.md)
-
-## 🗄️ Esquema de Base de Datos
-
-### Tablas
-
-- **roles** - Roles de usuarios (admin, user)
-- **users** - Cuentas de usuario con autenticación
-- **refresh_tokens** - Tokens JWT de refresco
-- **tasks** - Gestión de tareas
-- **tags** - Categorización de tareas
-- **task_tags** - Relación many-to-many entre tasks y tags
-
-Ver `scripts/init_db_azure.sql` para el esquema completo.
-
-### Diagrama ER
-
-```
-┌─────────────┐       ┌──────────────┐       ┌─────────────┐
-│    roles    │       │    users     │       │    tasks    │
-├─────────────┤       ├──────────────┤       ├─────────────┤
-│ id (PK)     │───┐   │ id (PK)      │───┐   │ id (PK)     │
-│ name        │   └──<│ role_id (FK) │   └──<│ user_id (FK)│
-│ description │       │ username     │       │ title       │
-└─────────────┘       │ email        │       │ description │
-                      │ password     │       │ status      │
-                      └──────────────┘       │ priority    │
-                                             │ due_date    │
-                      ┌──────────────┐       └─────────────┘
-                      │refresh_tokens│              │
-                      ├──────────────┤              │
-                      │ id (PK)      │              │
-                      │ user_id (FK) │         ┌────┴────┐
-                      │ token        │         │task_tags│
-                      │ expires_at   │         ├─────────┤
-                      └──────────────┘         │task_id  │
-                                               │tag_id   │
-                      ┌─────────────┐          └────┬────┘
-                      │    tags     │               │
-                      ├─────────────┤               │
-                      │ id (PK)     │───────────────┘
-                      │ name        │
-                      │ color       │
-                      │ user_id (FK)│
-                      └─────────────┘
-```
-
-## 🔒 Seguridad
-
-- ✅ Contraseñas hasheadas con bcrypt
-- ✅ Tokens JWT con expiración configurable
-- ✅ Control de acceso basado en roles (RBAC)
-- ✅ Rate limiting en todos los endpoints
-- ✅ Configuración CORS
-- ✅ Protección contra inyección SQL vía SQLAlchemy ORM
-- ✅ Validación de inputs
-- ✅ Refresh tokens almacenados en base de datos con revocación
-- ✅ HTTPS forzado en producción
-- ✅ Debug mode desactivado en producción
-
-## 📈 Rate Limiting
-
-Límites por defecto:
-- 200 peticiones por día
-- 50 peticiones por hora
-
-Personalizable en el archivo `.env` con la variable `RATELIMIT_DEFAULT`.
-
-## 🤝 Contribuciones
-
-Las contribuciones son bienvenidas. Para cambios importantes:
-
-1. Fork el repositorio
-2. Crea una rama feature (`git checkout -b feature/nueva-funcionalidad`)
-3. Commit tus cambios (`git commit -m 'Añadir nueva funcionalidad'`)
-4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
-5. Abre un Pull Request
-
-**Requisitos para PRs:**
-- ✅ Tests pasando (pytest)
-- ✅ Cobertura >70%
-- ✅ SonarCloud Quality Gate passing
-- ✅ Sin vulnerabilidades de seguridad
-
-## 📝 Licencia
-
-Este proyecto está licenciado bajo la Licencia MIT.
-
-## 👤 Autor
-
-**Erick (YamiDarknezz)**
-- GitHub: [@YamiDarknezz](https://github.com/YamiDarknezz)
-- Proyecto: [TaskForge API](https://github.com/YamiDarknezz/task-forge-api)
-- Demo: [API en Producción](https://task-forge-gbd6h8gtg8hchve9.chilecentral-01.azurewebsites.net/api/docs)
-
-## 🙏 Agradecimientos
-
-- Documentación de Flask
-- Documentación de SQLAlchemy
-- Documentación de Azure
-- Comunidad de pytest
-- Documentación de GitHub Actions
-- SonarCloud por el análisis de calidad de código
-- AXE-core por las herramientas de accesibilidad
-
-## 📊 Estadísticas del Proyecto
-
-- **Líneas de Código**: ~1,500+ (app)
-- **Tests**: 268
-- **Cobertura**: >73%
-- **Endpoints**: 30+
-- **Modelos**: 6
-- **Servicios**: 4
-- **Tiempo de Build**: ~3 minutos
-- **Tiempo de Deployment**: ~2 minutos
-
----
-
-⭐ **Si este proyecto te fue útil, considera darle una estrella en GitHub!**
-
-🚀 **Desarrollado con Flask, Python y mucho ☕**
+**Erick (YamiDarknezz)** — [GitHub](https://github.com/YamiDarknezz) · [TaskForge API](https://github.com/YamiDarknezz/task-forge-api)
